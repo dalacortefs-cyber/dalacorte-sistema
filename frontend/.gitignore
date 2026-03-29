@@ -1,6 +1,6 @@
 /node_modules
 /.next
-/out
+# /out — mantido no git para deploy via cPanel Git Version Control
 /build
 .DS_Store
 *.pem

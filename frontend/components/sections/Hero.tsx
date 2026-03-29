@@ -1,106 +1,150 @@
 'use client'
-import { ArrowRight, TrendingUp, Shield, Award } from 'lucide-react'
-import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { ArrowRight, Shield, BookOpen, TrendingUp, Star } from 'lucide-react'
 
 const stats = [
-  { value: '500+', label: 'Clientes atendidos' },
-  { value: '15+', label: 'Anos de experiência' },
-  { value: '98%', label: 'Satisfação' },
-  { value: 'R$ 2B+', label: 'Gerenciados' },
+  { value: 'Desde 2012',  label: 'Experiência consolidada' },
+  { value: 'CRC MG',      label: '120587 O — Registrado' },
+  { value: 'Tributário',  label: 'Planejamento especializado' },
+  { value: 'Consultivo',  label: 'Contabilidade estratégica' },
+]
+
+const badges = [
+  { icon: Shield,    text: 'CRC Certificado' },
+  { icon: TrendingUp, text: 'Planejamento Tributário' },
+  { icon: BookOpen,  text: 'Contabilidade Consultiva' },
 ]
 
 export default function Hero() {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero">
 
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-bronze-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-DEFAULT/5 rounded-full blur-3xl" />
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: 'linear-gradient(rgba(196,163,90,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(196,163,90,0.3) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      {/* Animated background blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="blob w-[600px] h-[600px] -top-48 -right-32 bg-primary-600/20 animate-float" />
+        <div className="blob w-[500px] h-[500px] -bottom-48 -left-32 bg-bronze-600/15 animate-float" style={{ animationDelay: '-3s' }} />
+        <div className="blob w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold-DEFAULT/5" />
+
+        {/* Grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(196,163,90,1) 1px, transparent 1px), linear-gradient(90deg, rgba(196,163,90,1) 1px, transparent 1px)',
+            backgroundSize: '70px 70px',
+          }}
+        />
+        {/* Radial vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_40%,#060f1a_100%)]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-          {/* Content */}
-          <div className="animate-slide-up">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-gold-DEFAULT/30 rounded-full px-4 py-2 mb-6">
-              <Award size={14} className="text-gold-DEFAULT" />
-              <span className="text-white/90 text-sm font-medium">Consultoria Financeira de Excelência</span>
+          {/* ── Left: Content ── */}
+          <div className="animate-slide-up space-y-8">
+
+            {/* Tag */}
+            <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 border border-gold-DEFAULT/30 bg-gold-DEFAULT/[0.08] backdrop-blur-sm">
+              <Star size={13} className="text-gold-DEFAULT fill-gold-DEFAULT" />
+              <span className="text-white/85 text-sm font-medium tracking-wide">CRC MG 120587 O · Contador desde 2012</span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6">
-              Números que{' '}
-              <span className="gradient-text">transformam</span>{' '}
-              negócios
-            </h1>
+            {/* Headline */}
+            <div>
+              <h1 className="font-serif text-5xl md:text-6xl xl:text-[68px] font-bold text-white leading-[1.1] tracking-tight">
+                Contabilidade que
+                <br />
+                <span className="gradient-text-gold">transforma</span>
+                <br />
+                decisões
+              </h1>
+            </div>
 
-            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
-              Da gestão contábil à consultoria estratégica — a Dalacorte Financial Solutions é o parceiro que o seu negócio precisa para crescer com segurança.
+            {/* Sub */}
+            <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-md">
+              Mais de uma década transformando contabilidade em vantagem competitiva. Planejamento tributário, análise profunda e consultoria estratégica para o crescimento do seu negócio.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 pt-2">
               <a href="#contato" className="btn-gold flex items-center gap-2 text-base group">
-                Começar agora
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                Fale com um especialista
+                <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform duration-200" />
               </a>
-              <a href="#servicos" className="btn-outline border-white/40 text-white hover:bg-white/10 hover:text-white text-base">
+              <a
+                href="#servicos"
+                className="flex items-center gap-2 text-white/80 hover:text-white text-base font-medium border border-white/20 hover:border-white/40 px-6 py-3 rounded-xl transition-all duration-300 hover:bg-white/[0.06] backdrop-blur-sm"
+              >
                 Nossos serviços
               </a>
             </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-6 mt-12 pt-8 border-t border-white/10">
-              {[
-                { icon: Shield, text: 'CRC Certificado' },
-                { icon: TrendingUp, text: 'Gestão Estratégica' },
-                { icon: Award, text: 'Top 10 BR 2024' },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-2 text-white/60 text-sm">
-                  <Icon size={16} className="text-gold-DEFAULT" />
+            {/* Trust line */}
+            <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-white/[0.08]">
+              {badges.map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-2 text-white/50 text-sm hover:text-white/70 transition-colors group">
+                  <Icon size={15} className="text-gold-DEFAULT group-hover:scale-110 transition-transform" />
                   {text}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Stats cards */}
-          <div className="grid grid-cols-2 gap-4 animate-slide-in-right">
-            {stats.map((stat, i) => (
-              <div
-                key={stat.label}
-                className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:border-gold-DEFAULT/30 hover:shadow-gold group"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                <p className="text-4xl font-bold font-serif text-white group-hover:text-gold-DEFAULT transition-colors">{stat.value}</p>
-                <p className="text-white/60 text-sm mt-1">{stat.label}</p>
-              </div>
-            ))}
+          {/* ── Right: Logo + Stats ── */}
+          <div className="flex flex-col items-center gap-8 animate-slide-in-right">
 
-            {/* Feature card */}
-            <div className="col-span-2 bg-gradient-bronze rounded-2xl p-6 shadow-gold">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp size={18} className="text-white" />
-                </div>
-                <span className="text-white font-semibold">IA Financeira</span>
+            {/* Logo container espelhado */}
+            <div className="relative">
+              {/* Outer glow ring */}
+              <div className="absolute inset-0 rounded-full bg-gold-DEFAULT/10 blur-2xl scale-125 animate-glow-pulse" />
+
+              {/* Ring decoration */}
+              <div className="absolute inset-[-12px] rounded-full border border-gold-DEFAULT/20 animate-[spin_20s_linear_infinite]">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gold-DEFAULT" />
               </div>
-              <p className="text-white/80 text-sm">
-                Análise inteligente de extratos bancários e relatórios automatizados com inteligência artificial.
-              </p>
+              <div className="absolute inset-[-24px] rounded-full border border-white/[0.05] animate-[spin_35s_linear_infinite_reverse]">
+                <div className="absolute bottom-0 left-1/4 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-bronze-400/60" />
+              </div>
+
+              {/* Logo glass container */}
+              <div className="relative w-52 h-52 rounded-full mirror-shine overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 35% 30%, rgba(196,163,90,0.15) 0%, rgba(27,61,80,0.4) 50%, rgba(6,15,26,0.6) 100%)',
+                  border: '1px solid rgba(196,163,90,0.25)',
+                  boxShadow: '0 0 40px rgba(196,163,90,0.15), 0 0 80px rgba(27,61,80,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(8px)',
+                }}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="Dalacorte Financial Solutions"
+                  fill
+                  className="object-contain p-8 drop-shadow-2xl"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3 w-full">
+              {stats.map((item) => (
+                <div
+                  key={item.value}
+                  className="glass-card group cursor-default"
+                >
+                  <p className="text-lg font-bold font-serif text-white group-hover:gradient-text-gold transition-colors leading-tight">{item.value}</p>
+                  <p className="text-white/45 text-xs mt-1 leading-snug">{item.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <div className="w-px h-12 bg-gradient-to-b from-white/0 to-white/40" />
-        <div className="w-1.5 h-1.5 rounded-full bg-gold-DEFAULT" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <div className="w-px h-10 bg-gradient-to-b from-transparent to-white/30" />
+        <div className="w-1.5 h-1.5 rounded-full bg-gold-DEFAULT animate-bounce" />
       </div>
     </section>
   )

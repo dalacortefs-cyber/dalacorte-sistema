@@ -1,78 +1,127 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, Phone, MapPin, Instagram, Linkedin, Facebook } from 'lucide-react'
+
+const navLinks = [
+  { label: 'Início',    href: '#inicio' },
+  { label: 'Serviços',  href: '#servicos' },
+  { label: 'Sobre Nós', href: '#sobre' },
+  { label: 'Missão',    href: '#missao' },
+  { label: 'Notícias',  href: '#noticias' },
+  { label: 'Contato',   href: '#contato' },
+]
+
+const contactItems = [
+  { icon: Mail,   text: 'contato@dalacortefs.com.br' },
+  { icon: Phone,  text: '(38) 99754-1448' },
+  { icon: MapPin, text: 'R. Abadia Lemos do Prado, 199\nPrado — Paracatu, MG' },
+]
+
+const socials = [
+  { icon: Instagram, href: '#' },
+  { icon: Linkedin,  href: '#' },
+  { icon: Facebook,  href: '#' },
+]
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #060f1a 0%, #030a10 100%)' }}>
+
+      {/* Top gradient border */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold-DEFAULT/40 to-transparent" />
+
+      {/* Background blobs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="blob w-[500px] h-[500px] -bottom-32 -left-32 bg-primary-900/30" />
+        <div className="blob w-[400px] h-[400px] -top-32 right-0 bg-bronze-900/20" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
 
           {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-bronze flex items-center justify-center text-white font-bold shadow-gold">
-                DFS
+          <div className="md:col-span-5">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative h-14 w-14 rounded-full overflow-hidden ring-1 ring-gold-DEFAULT/25 shrink-0"
+                style={{ background: 'rgba(255,255,255,0.04)' }}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="Dalacorte Financial Solutions"
+                  fill
+                  className="object-contain p-2"
+                />
               </div>
               <div>
-                <p className="font-serif font-bold text-xl">DALACORTE</p>
-                <p className="text-gold-DEFAULT text-xs tracking-widest">FINANCIAL SOLUTIONS</p>
+                <p className="font-serif font-bold text-xl text-white tracking-wide">DALACORTE</p>
+                <p className="text-gold-DEFAULT text-[10px] tracking-[0.22em] uppercase font-medium">Financial Solutions</p>
+                <p className="text-white/25 text-xs mt-0.5">CRC MG 120587 O</p>
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed max-w-sm">
-              Transformamos números em decisões estratégicas. Consultoria financeira e contábil de excelência para o crescimento sustentável do seu negócio.
+
+            <p className="text-white/45 text-sm leading-relaxed max-w-sm">
+              Contabilidade vai além de entregar guias. Desde 2012 oferecemos atendimento especializado, análise profunda e consultoria contábil que auxilia sua empresa nas melhores decisões.
             </p>
-            <div className="flex gap-4 mt-6">
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-DEFAULT/20 flex items-center justify-center transition-colors">
-                <Instagram size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-DEFAULT/20 flex items-center justify-center transition-colors">
-                <Linkedin size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-DEFAULT/20 flex items-center justify-center transition-colors">
-                <Facebook size={16} />
-              </a>
+
+            {/* Social */}
+            <div className="flex gap-3 mt-7">
+              {socials.map(({ icon: Icon, href }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-white transition-all duration-300 hover:bg-white/[0.08] border border-white/[0.07] hover:border-gold-DEFAULT/30"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Links */}
-          <div>
-            <h4 className="font-semibold text-gold-DEFAULT mb-4 tracking-wide uppercase text-sm">Navegação</h4>
+          <div className="md:col-span-3">
+            <h4 className="font-semibold text-white/70 mb-5 tracking-[0.12em] uppercase text-xs">Navegação</h4>
             <ul className="space-y-2.5">
-              {['Início', 'Serviços', 'Sobre Nós', 'Notícias', 'Carreiras', 'Contato'].map(item => (
-                <li key={item}>
-                  <a href="#" className="text-white/60 hover:text-gold-DEFAULT text-sm transition-colors">{item}</a>
+              {navLinks.map(item => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-white/40 hover:text-gold-DEFAULT text-sm transition-colors duration-200 flex items-center gap-2 group">
+                    <span className="w-3 h-px bg-white/20 group-hover:bg-gold-DEFAULT/60 group-hover:w-5 transition-all duration-300" />
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contato */}
-          <div>
-            <h4 className="font-semibold text-gold-DEFAULT mb-4 tracking-wide uppercase text-sm">Contato</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-white/60">
-                <Mail size={15} className="mt-0.5 text-gold-DEFAULT shrink-0" />
-                contato@dalacortefs.com.br
-              </li>
-              <li className="flex items-start gap-3 text-sm text-white/60">
-                <Phone size={15} className="mt-0.5 text-gold-DEFAULT shrink-0" />
-                (11) 99000-0000
-              </li>
-              <li className="flex items-start gap-3 text-sm text-white/60">
-                <MapPin size={15} className="mt-0.5 text-gold-DEFAULT shrink-0" />
-                São Paulo, SP — Brasil
-              </li>
+          {/* Contact */}
+          <div className="md:col-span-4">
+            <h4 className="font-semibold text-white/70 mb-5 tracking-[0.12em] uppercase text-xs">Contato</h4>
+            <ul className="space-y-4">
+              {contactItems.map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-start gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-gold-DEFAULT/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon size={13} className="text-gold-DEFAULT" />
+                  </div>
+                  <span className="text-white/45 text-sm whitespace-pre-line">{text}</span>
+                </li>
+              ))}
             </ul>
+
+            <div className="mt-5 rounded-xl px-4 py-3 border border-white/[0.07] bg-white/[0.03]">
+              <p className="text-white/35 text-[10px] font-semibold uppercase tracking-[0.15em] mb-1.5">Atendimento</p>
+              <p className="text-white/50 text-xs">Segunda a Sexta: <span className="text-white/70 font-medium">8h às 18h</span></p>
+              <p className="text-white/25 text-xs mt-1">Não atendemos sábados e domingos.</p>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-white/40 text-sm">
+        {/* Bottom bar */}
+        <div className="border-t border-white/[0.07] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-white/25 text-xs">
             © {new Date().getFullYear()} Dalacorte Financial Solutions. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-white/40 hover:text-white text-sm transition">Privacidade</a>
-            <a href="#" className="text-white/40 hover:text-white text-sm transition">Termos</a>
+            <a href="#" className="text-white/25 hover:text-white/60 text-xs transition-colors">Privacidade</a>
+            <a href="#" className="text-white/25 hover:text-white/60 text-xs transition-colors">Termos de uso</a>
           </div>
         </div>
       </div>

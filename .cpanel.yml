@@ -1,0 +1,34 @@
+---
+deployment:
+  tasks:
+
+    # ── 1. Pastas necessárias ────────────────────────────────
+    - mkdir -p $HOME/laravel
+    - mkdir -p $HOME/public_html/api
+
+    # ── 2. Backend → ~/laravel/  (preserva .env existente) ──
+    - rsync -a --delete ./dalacorte-sistema/backend/ $HOME/laravel/ --exclude='.env' --exclude='storage/logs/' --exclude='storage/framework/cache/' --exclude='storage/framework/sessions/' --exclude='storage/framework/views/'
+
+    # ── 3. Permissões ────────────────────────────────────────
+    - chmod -R 775 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
+
+    # ── 4. .env: cria apenas se não existir ──────────────────
+    - test -f $HOME/laravel/.env || cp $HOME/laravel/.env.example $HOME/laravel/.env
+
+    # ── 5. Artisan setup ─────────────────────────────────────
+    - cd $HOME/laravel && php artisan key:generate --force
+    - cd $HOME/laravel && php artisan jwt:secret --force
+    - cd $HOME/laravel && php artisan migrate --force
+    - cd $HOME/laravel && php artisan config:cache
+    - cd $HOME/laravel && php artisan route:cache
+    - cd $HOME/laravel && php artisan view:cache
+
+    # ── 6. Bridge api/ ───────────────────────────────────────
+    - cp ./dalacorte-sistema/backend/public_html_api_index.php $HOME/public_html/api/index.php
+    - cp ./dalacorte-sistema/backend/public/.htaccess $HOME/public_html/api/.htaccess
+
+    # ── 7. Frontend estático → public_html/ ──────────────────
+    - rsync -a --delete ./dalacorte-sistema/frontend/out/ $HOME/public_html/ --exclude='api/'
+
+    # ── 8. .htaccess raiz ────────────────────────────────────
+    - cp ./dalacorte-sistema/backend/public_html_htaccess $HOME/public_html/.htaccess
