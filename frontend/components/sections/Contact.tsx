@@ -9,12 +9,17 @@ const info = [
   { icon: MapPin, title: 'Endereço',            value: 'R. Abadia Lemos do Prado, 199\nPrado — Paracatu, MG' },
 ]
 
+const selectClass = 'input-dark appearance-none'
+
 export default function Contact() {
   const [sent, setSent]       = useState(false)
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    nome: '', email: '', telefone: '', empresa: '', mensagem: '', servico: '',
+    nome: '', email: '', telefone: '', empresa: '', cnpj: '',
+    regime: '', funcionarios: '', plano: '', servico: '', mensagem: '',
   })
+
+  const set = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }))
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,9 +47,9 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-14">
           <span className="inline-flex items-center gap-2 text-gold-DEFAULT font-semibold text-xs tracking-[0.2em] uppercase mb-4">
-            <span className="w-8 h-px bg-gradient-to-r from-transparent to-gold-DEFAULT/60" />
+            <span className="w-8 h-px bg-gradient-to-r from-transparent to-[rgba(196,163,90,0.6)]" />
             Entre em contato
-            <span className="w-8 h-px bg-gradient-to-l from-transparent to-gold-DEFAULT/60" />
+            <span className="w-8 h-px bg-gradient-to-l from-transparent to-[rgba(196,163,90,0.6)]" />
           </span>
           <h2 className="section-title-light mt-1">
             Vamos conversar sobre{' '}
@@ -74,7 +79,7 @@ export default function Contact() {
             {/* Horário */}
             <div className="glass-card border-gold-DEFAULT/25 group">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-gold-DEFAULT/15 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-[rgba(196,163,90,0.15)] flex items-center justify-center">
                   <Clock size={15} className="text-gold-DEFAULT" />
                 </div>
                 <p className="text-white font-semibold text-sm">Horário de atendimento</p>
@@ -114,46 +119,93 @@ export default function Contact() {
                 <p className="text-white/45 text-sm">Nossa equipe entrará em contato em até 24 horas úteis.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="glass-card space-y-5">
+              <form onSubmit={handleSubmit} className="glass-card space-y-4">
+
+                {/* Nome + Email */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="label-dark">Nome *</label>
-                    <input className="input-dark" placeholder="Seu nome" value={form.nome} onChange={e => setForm({...form, nome: e.target.value})} required />
+                    <input className="input-dark" placeholder="Seu nome" value={form.nome} onChange={e => set('nome', e.target.value)} required />
                   </div>
                   <div>
                     <label className="label-dark">E-mail *</label>
-                    <input className="input-dark" type="email" placeholder="seu@email.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required />
+                    <input className="input-dark" type="email" placeholder="seu@email.com" value={form.email} onChange={e => set('email', e.target.value)} required />
                   </div>
                 </div>
+
+                {/* Telefone + Empresa */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="label-dark">Telefone</label>
-                    <input className="input-dark" placeholder="(38) 99000-0000" value={form.telefone} onChange={e => setForm({...form, telefone: e.target.value})} />
+                    <label className="label-dark">Telefone / WhatsApp</label>
+                    <input className="input-dark" placeholder="(38) 99000-0000" value={form.telefone} onChange={e => set('telefone', e.target.value)} />
                   </div>
                   <div>
                     <label className="label-dark">Empresa</label>
-                    <input className="input-dark" placeholder="Nome da empresa" value={form.empresa} onChange={e => setForm({...form, empresa: e.target.value})} />
+                    <input className="input-dark" placeholder="Nome da empresa" value={form.empresa} onChange={e => set('empresa', e.target.value)} />
                   </div>
                 </div>
+
+                {/* CNPJ */}
                 <div>
-                  <label className="label-dark">Serviço de interesse</label>
-                  <select
-                    className="input-dark"
-                    value={form.servico}
-                    onChange={e => setForm({...form, servico: e.target.value})}
-                  >
-                    <option value="" className="bg-[#0f2029]">Selecione um serviço</option>
-                    <option className="bg-[#0f2029]">Contabilidade Empresarial</option>
-                    <option className="bg-[#0f2029]">Planejamento Tributário</option>
-                    <option className="bg-[#0f2029]">Revisão e Recuperação de Tributos</option>
-                    <option className="bg-[#0f2029]">Gestão Fiscal e Tributária</option>
-                    <option className="bg-[#0f2029]">Departamento Pessoal</option>
-                    <option className="bg-[#0f2029]">Consultoria Financeira</option>
-                    <option className="bg-[#0f2029]">Contabilidade Consultiva</option>
-                    <option className="bg-[#0f2029]">BPO Financeiro</option>
-                    <option className="bg-[#0f2029]">Outro</option>
-                  </select>
+                  <label className="label-dark">CNPJ</label>
+                  <input className="input-dark" placeholder="00.000.000/0000-00" value={form.cnpj} onChange={e => set('cnpj', e.target.value)} />
                 </div>
+
+                {/* Regime + Funcionários */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="label-dark">Regime tributário</label>
+                    <select className={selectClass} value={form.regime} onChange={e => set('regime', e.target.value)}>
+                      <option value="" className="bg-[#0f2029]">Selecione...</option>
+                      <option className="bg-[#0f2029]">Simples Nacional</option>
+                      <option className="bg-[#0f2029]">Lucro Presumido</option>
+                      <option className="bg-[#0f2029]">Lucro Real</option>
+                      <option className="bg-[#0f2029]">Não sei</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="label-dark">Nº de funcionários</label>
+                    <select className={selectClass} value={form.funcionarios} onChange={e => set('funcionarios', e.target.value)}>
+                      <option value="" className="bg-[#0f2029]">Selecione...</option>
+                      <option className="bg-[#0f2029]">0</option>
+                      <option className="bg-[#0f2029]">1 – 5</option>
+                      <option className="bg-[#0f2029]">6 – 20</option>
+                      <option className="bg-[#0f2029]">21 – 50</option>
+                      <option className="bg-[#0f2029]">+50</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Plano + Serviço */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="label-dark">Plano de interesse</label>
+                    <select className={selectClass} value={form.plano} onChange={e => set('plano', e.target.value)}>
+                      <option value="" className="bg-[#0f2029]">Selecione...</option>
+                      <option className="bg-[#0f2029]">Essencial</option>
+                      <option className="bg-[#0f2029]">Estratégico</option>
+                      <option className="bg-[#0f2029]">Executivo</option>
+                      <option className="bg-[#0f2029]">Quero indicação</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="label-dark">Serviço de interesse</label>
+                    <select className={selectClass} value={form.servico} onChange={e => set('servico', e.target.value)}>
+                      <option value="" className="bg-[#0f2029]">Selecione um serviço</option>
+                      <option className="bg-[#0f2029]">Contabilidade Empresarial</option>
+                      <option className="bg-[#0f2029]">Planejamento Tributário</option>
+                      <option className="bg-[#0f2029]">Revisão e Recuperação de Tributos</option>
+                      <option className="bg-[#0f2029]">Gestão Fiscal e Tributária</option>
+                      <option className="bg-[#0f2029]">Departamento Pessoal</option>
+                      <option className="bg-[#0f2029]">Consultoria Financeira</option>
+                      <option className="bg-[#0f2029]">Contabilidade Consultiva</option>
+                      <option className="bg-[#0f2029]">BPO Financeiro</option>
+                      <option className="bg-[#0f2029]">Outro</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Mensagem */}
                 <div>
                   <label className="label-dark">Mensagem *</label>
                   <textarea
@@ -161,10 +213,11 @@ export default function Contact() {
                     rows={4}
                     placeholder="Conte-nos sobre seu negócio e como podemos ajudar..."
                     value={form.mensagem}
-                    onChange={e => setForm({...form, mensagem: e.target.value})}
+                    onChange={e => set('mensagem', e.target.value)}
                     required
                   />
                 </div>
+
                 <button
                   type="submit"
                   disabled={loading}

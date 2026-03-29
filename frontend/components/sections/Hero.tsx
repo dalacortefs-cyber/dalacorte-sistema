@@ -44,9 +44,9 @@ export default function Hero() {
           <div className="animate-slide-up space-y-8">
 
             {/* Tag */}
-            <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 border border-gold-DEFAULT/30 bg-gold-DEFAULT/[0.08] backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 border border-gold-DEFAULT/30 bg-gold-DEFAULT/[0.08] backdrop-blur-sm animate-pulse-gold">
               <Star size={13} className="text-gold-DEFAULT fill-gold-DEFAULT" />
-              <span className="text-white/85 text-sm font-medium tracking-wide">CRC MG 120587 O · Contador desde 2012</span>
+              <span className="text-white/85 text-sm font-medium tracking-wide">Mais de 13 anos transformando contabilidades</span>
             </div>
 
             {/* Headline */}

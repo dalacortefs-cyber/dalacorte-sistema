@@ -8,14 +8,14 @@ import { cn } from '@/lib/utils'
 const navLinks = [
   { label: 'Início',    href: '#inicio' },
   { label: 'Serviços',  href: '#servicos' },
+  { label: 'Planos',    href: '#planos' },
   { label: 'Sobre',     href: '#sobre' },
-  { label: 'Missão',    href: '#missao' },
   { label: 'Notícias',  href: '#noticias' },
   { label: 'Contato',   href: '#contato' },
 ]
 
 export default function Navbar() {
-  const [open, setOpen]       = useState(false)
+  const [open, setOpen]         = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -28,29 +28,35 @@ export default function Navbar() {
     <nav className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
       scrolled
-        ? 'py-2 bg-[#060f1a]/90 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_4px_30px_rgba(0,0,0,0.4)]'
+        ? 'py-2 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_4px_30px_rgba(0,0,0,0.4)]'
         : 'py-5 bg-transparent'
-    )}>
+    )}
+    style={scrolled ? { background: 'rgba(27,61,80,0.97)' } : {}}
+    >
       {/* Gold line at very top */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-DEFAULT/70 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(196,163,90,0.7)] to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-11 w-11 shrink-0 rounded-full overflow-hidden ring-1 ring-gold-DEFAULT/30 group-hover:ring-gold-DEFAULT/60 transition-all duration-300 shadow-[0_0_15px_rgba(196,163,90,0.2)]">
+          {/* Logo — proporções naturais, sem container circular fixo */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
+            <div className="relative flex items-center">
+              {/* Subtle glow ring behind logo */}
+              <div className="absolute inset-0 rounded-lg bg-[rgba(196,163,90,0.1)] blur-md scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               <Image
                 src="/logo.png"
                 alt="Dalacorte Financial Solutions"
-                fill
-                className="object-contain scale-90"
+                width={160}
+                height={52}
                 priority
+                className="object-contain relative"
+                style={{ height: '52px', width: 'auto', maxHeight: '52px', background: 'transparent' }}
               />
             </div>
             <div className="hidden sm:block">
               <p className="text-white font-serif font-bold text-base leading-tight tracking-wide">DALACORTE</p>
-              <p className="text-gold-DEFAULT text-[10px] tracking-[0.2em] uppercase font-medium">Financial Solutions</p>
+              <p className="text-[#C4A35A] text-[10px] tracking-[0.2em] uppercase font-medium">Financial Solutions</p>
             </div>
           </Link>
 
@@ -63,7 +69,7 @@ export default function Navbar() {
                 className="relative text-white/70 hover:text-white px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:bg-white/[0.06] group"
               >
                 {link.label}
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-bronze-500 to-gold-DEFAULT rounded-full group-hover:w-4/5 transition-all duration-300" />
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-bronze-500 to-[#C4A35A] rounded-full group-hover:w-4/5 transition-all duration-300" />
               </a>
             ))}
           </div>

@@ -38,14 +38,14 @@ export default function About() {
               <div className="relative z-10 p-10">
 
                 {/* Logo */}
-                <div className="relative w-16 h-16 mb-6 rounded-full overflow-hidden ring-1 ring-gold-DEFAULT/30"
-                  style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(8px)' }}
-                >
+                <div className="mb-6 flex items-center">
                   <Image
                     src="/logo.png"
                     alt="Dalacorte Financial Solutions"
-                    fill
-                    className="object-contain p-2"
+                    width={180}
+                    height={60}
+                    className="object-contain"
+                    style={{ height: '60px', width: 'auto', maxHeight: '60px', background: 'transparent' }}
                   />
                 </div>
 

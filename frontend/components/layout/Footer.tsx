@@ -42,14 +42,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-4 mb-6">
-              <div className="relative h-14 w-14 rounded-full overflow-hidden ring-1 ring-gold-DEFAULT/25 shrink-0"
-                style={{ background: 'rgba(255,255,255,0.04)' }}
-              >
+              <div className="shrink-0 flex items-center">
                 <Image
                   src="/logo.png"
                   alt="Dalacorte Financial Solutions"
-                  fill
-                  className="object-contain p-2"
+                  width={180}
+                  height={60}
+                  className="object-contain"
+                  style={{ height: '60px', width: 'auto', maxHeight: '60px', background: 'transparent' }}
                 />
               </div>
               <div>
