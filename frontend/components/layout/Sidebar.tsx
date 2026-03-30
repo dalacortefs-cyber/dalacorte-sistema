@@ -5,7 +5,7 @@ import { useState } from 'react'
 import {
   LayoutDashboard, Users, FileText, CheckSquare, Target,
   Brain, Newspaper, Briefcase, Settings, LogOut,
-  ChevronLeft, ChevronRight, Bell, User
+  ChevronLeft, ChevronRight, Bell, User, Megaphone
 } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { cn, getInitials } from '@/lib/utils'
@@ -18,6 +18,7 @@ const navItems = [
   { href: '/dashboard/leads', icon: Target, label: 'CRM / Leads' },
   { href: '/dashboard/ia', icon: Brain, label: 'IA Financeira' },
   { href: '/dashboard/noticias', icon: Newspaper, label: 'Notícias' },
+  { href: '/dashboard/marketing', icon: Megaphone, label: 'Marketing' },
   { href: '/dashboard/rh', icon: Briefcase, label: 'RH / Vagas' },
   { href: '/dashboard/configuracoes', icon: Settings, label: 'Configurações' },
 ]
