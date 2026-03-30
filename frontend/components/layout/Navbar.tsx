@@ -46,16 +46,16 @@ export default function Navbar() {
               <div className="absolute inset-0 rounded-lg bg-[rgba(196,163,90,0.1)] blur-md scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               <Image
                 src="/logo.png"
-                alt="Dalacorte Financial Solutions"
+                alt="DFS Financial Solutions"
                 width={160}
                 height={52}
                 priority
                 className="object-contain relative"
-                style={{ height: '52px', width: 'auto', maxHeight: '52px', background: 'transparent' }}
+                style={{ height: '52px', width: 'auto', maxHeight: '52px', mixBlendMode: 'multiply' }}
               />
             </div>
             <div className="hidden sm:block">
-              <p className="text-white font-serif font-bold text-base leading-tight tracking-wide">DALACORTE</p>
+              <p className="text-white font-serif font-bold text-base leading-tight tracking-wide">DFS</p>
               <p className="text-[#C4A35A] text-[10px] tracking-[0.2em] uppercase font-medium">Financial Solutions</p>
             </div>
           </Link>

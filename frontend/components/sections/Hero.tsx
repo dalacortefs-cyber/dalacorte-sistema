@@ -117,10 +117,11 @@ export default function Hero() {
               >
                 <Image
                   src="/logo.png"
-                  alt="Dalacorte Financial Solutions"
+                  alt="DFS Financial Solutions"
                   fill
                   className="object-contain p-8 drop-shadow-2xl"
                   priority
+                  style={{ mixBlendMode: 'multiply' }}
                 />
               </div>
             </div>

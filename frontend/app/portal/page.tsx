@@ -46,7 +46,7 @@ export default function PortalClientePage() {
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-gradient-bronze rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-gold">DFS</div>
             <div>
-              <p className="font-serif font-bold text-sm">DALACORTE</p>
+              <p className="font-serif font-bold text-sm">DFS</p>
               <p className="text-gold-DEFAULT text-[10px] tracking-widest">PORTAL DO CLIENTE</p>
             </div>
           </div>

@@ -45,15 +45,15 @@ export default function Footer() {
               <div className="shrink-0 flex items-center">
                 <Image
                   src="/logo.png"
-                  alt="Dalacorte Financial Solutions"
+                  alt="DFS Financial Solutions"
                   width={180}
                   height={60}
                   className="object-contain"
-                  style={{ height: '60px', width: 'auto', maxHeight: '60px', background: 'transparent' }}
+                  style={{ height: '60px', width: 'auto', maxHeight: '60px', mixBlendMode: 'multiply' }}
                 />
               </div>
               <div>
-                <p className="font-serif font-bold text-xl text-white tracking-wide">DALACORTE</p>
+                <p className="font-serif font-bold text-xl text-white tracking-wide">DFS</p>
                 <p className="text-gold-DEFAULT text-[10px] tracking-[0.22em] uppercase font-medium">Financial Solutions</p>
                 <p className="text-white/25 text-xs mt-0.5">CRC MG 120587 O</p>
               </div>
@@ -117,7 +117,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/[0.07] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-white/25 text-xs">
-            © {new Date().getFullYear()} Dalacorte Financial Solutions. Todos os direitos reservados.
+            © {new Date().getFullYear()} DFS Financial Solutions. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-white/25 hover:text-white/60 text-xs transition-colors">Privacidade</a>

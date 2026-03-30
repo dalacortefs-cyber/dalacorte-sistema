@@ -31,6 +31,15 @@ export default function About() {
                 boxShadow: '0 24px 60px rgba(6,15,26,0.35), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.08)',
               }}
             >
+              {/* Professional photo background */}
+              <div className="absolute inset-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80&auto=format&fit=crop"
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.12]"
+                />
+              </div>
               {/* Reflection blob inside card */}
               <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-gold-DEFAULT/[0.06] blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-bronze-500/[0.08] blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
@@ -41,11 +50,11 @@ export default function About() {
                 <div className="mb-6 flex items-center">
                   <Image
                     src="/logo.png"
-                    alt="Dalacorte Financial Solutions"
+                    alt="DFS Financial Solutions"
                     width={180}
                     height={60}
                     className="object-contain"
-                    style={{ height: '60px', width: 'auto', maxHeight: '60px', background: 'transparent' }}
+                    style={{ height: '60px', width: 'auto', maxHeight: '60px', mixBlendMode: 'multiply' }}
                   />
                 </div>
 
@@ -101,7 +110,7 @@ export default function About() {
             <div className="divider-gold mt-3 mb-5" />
             <h2 className="section-title mb-6">
               Por que escolher a{' '}
-              <span className="gradient-text">Dalacorte?</span>
+              <span className="gradient-text">DFS?</span>
             </h2>
             <p className="text-gray-500 leading-relaxed mb-8 text-[15px]">
               Somos especialistas em planejamento tributário, revisão e recuperação de tributos. Mais do que um escritório contábil, somos parceiros estratégicos que entendem profundamente o seu negócio e trabalham para que você tome as melhores decisões.

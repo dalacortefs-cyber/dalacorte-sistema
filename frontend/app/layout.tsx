@@ -3,32 +3,32 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
-  title: 'Dalacorte Financial Solutions — Contabilidade Consultiva em Paracatu, MG',
+  title: 'DFS Financial Solutions — Contabilidade Consultiva em Paracatu, MG',
   description:
     'Escritório de contabilidade consultiva com mais de 13 anos de experiência. Especialistas em planejamento tributário, departamento pessoal, BPO financeiro e recuperação de tributos. CRC MG 120587 O.',
   keywords:
-    'contabilidade, consultoria financeira, planejamento tributário, departamento pessoal, BPO financeiro, recuperação de tributos, Paracatu MG, Dalacorte',
+    'contabilidade, consultoria financeira, planejamento tributário, departamento pessoal, BPO financeiro, recuperação de tributos, Paracatu MG, DFS',
   metadataBase: new URL('https://dalacortefs.com.br'),
   openGraph: {
-    title: 'Dalacorte Financial Solutions — Contabilidade Consultiva',
+    title: 'DFS Financial Solutions — Contabilidade Consultiva',
     description:
       'Mais de 13 anos transformando contabilidade em vantagem competitiva. Planejamento tributário, consultoria estratégica e BPO financeiro para empresas de todos os portes.',
     type: 'website',
     locale: 'pt_BR',
     url: 'https://dalacortefs.com.br',
-    siteName: 'Dalacorte Financial Solutions',
+    siteName: 'DFS Financial Solutions',
     images: [
       {
         url: 'https://dalacortefs.com.br/logo.png',
         width: 512,
         height: 512,
-        alt: 'Dalacorte Financial Solutions',
+        alt: 'DFS Financial Solutions',
       },
     ],
   },
   twitter: {
     card: 'summary',
-    title: 'Dalacorte Financial Solutions',
+    title: 'DFS Financial Solutions',
     description: 'Contabilidade consultiva com mais de 13 anos de experiência. Paracatu, MG.',
     images: ['https://dalacortefs.com.br/logo.png'],
   },

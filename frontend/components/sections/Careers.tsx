@@ -40,7 +40,7 @@ export default function Careers() {
             <span className="text-bronze-500 font-semibold text-xs tracking-[0.18em] uppercase">Faça parte do time</span>
             <div className="divider-gold mt-3 mb-5" />
             <h2 className="section-title mb-6">
-              Carreiras na <span className="gradient-text">Dalacorte</span>
+              Carreiras na <span className="gradient-text">DFS</span>
             </h2>
             <p className="text-gray-500 leading-relaxed mb-8 text-[15px]">
               Valorizamos profissionais apaixonados por contabilidade, números e resultado. Se você quer crescer em um escritório focado em excelência técnica e atendimento especializado, venha fazer parte da nossa equipe em Paracatu — MG.

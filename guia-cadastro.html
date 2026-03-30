@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Guia de Cadastro — DFS Financial Solutions</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; color: #222; }
+  .capa { background: #1B3A4B; color: white; text-align: center; padding: 48px 32px; }
+  .capa h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  .capa p { color: #C9A96E; font-size: 14px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 32px 16px; }
+  .section { background: white; border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .section-header { background: #1B3A4B; color: white; padding: 16px 24px; }
+  .section-header h2 { font-size: 16px; font-weight: 700; }
+  .section-header p { font-size: 12px; color: #C9A96E; margin-top: 3px; }
+  .section-body { padding: 24px; }
+  .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .step-num { width: 32px; height: 32px; background: #C9A96E; color: #1B3A4B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+  .step-content h3 { font-size: 14px; font-weight: 700; color: #1B3A4B; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: #555; line-height: 1.6; }
+  code { background: #f0f4f8; padding: 2px 7px; border-radius: 4px; font-family: monospace; font-size: 12px; color: #1B3A4B; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge-admin { background: #dbeafe; color: #1d4ed8; }
+  .badge-func { background: #d1fae5; color: #065f46; }
+  .badge-client { background: #fef3c7; color: #92400e; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f8fafc; color: #1B3A4B; font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #444; }
+  tr:last-child td { border-bottom: none; }
+  .alert { background: #fffbeb; border-left: 4px solid #C9A96E; padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 13px; color: #78350f; margin-top: 16px; }
+  .alert strong { display: block; margin-bottom: 4px; }
+  .print-btn { position: fixed; bottom: 24px; right: 24px; background: #1B3A4B; color: white; border: none; padding: 12px 20px; border-radius: 24px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+  @media print { .print-btn { display: none; } body { background: white; } }
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <h1>Guia de Cadastro de Usuários</h1>
+  <p>DFS Financial Solutions · Sistema de Gestão Interno</p>
+</div>
+
+<div class="container">
+
+  <!-- VISÃO GERAL DE PERFIS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Perfis de Usuário do Sistema</h2>
+      <p>Três níveis de acesso com permissões distintas</p>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr>
+          <th>Perfil</th>
+          <th>Acesso</th>
+          <th>Uso</th>
+        </tr>
+        <tr>
+          <td><span class="badge badge-admin">Admin</span></td>
+          <td>Dashboard completo — todos os módulos</td>
+          <td>Você (dono do escritório)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-func">Funcionário</span></td>
+          <td>Dashboard completo — todos os módulos</td>
+          <td>Colaboradores internos do escritório</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-client">Cliente</span></td>
+          <td>Portal do Cliente apenas (Resumo, Extratos, Notícias, IA)</td>
+          <td>Clientes externos do escritório</td>
+        </tr>
+      </table>
+      <div class="alert">
+        <strong>⚠️ Atenção antes de começar</strong>
+        O sistema precisa estar com o banco de dados configurado e as migrations rodadas no servidor.
+        Se o Laravel ainda não está funcionando, o login retornará erro.
+        Teste com as credenciais padrão: <code>admin@dalacortefs.com.br</code> / <code>Admin@2024</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADASTRO DE FUNCIONÁRIO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Cadastrar Novo Funcionário</h2>
+      <p>Acesso completo ao dashboard interno</p>
+    </div>
+    <div class="section-body">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Acesse o sistema como Admin</h3>
+          <p>Acesse <code>dalacortefs.com.br/login</code> com sua conta de administrador.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Via API — endpoint de criação de usuário</h3>
+          <p>Atualmente o cadastro de usuários é feito via API diretamente. Use o seguinte endpoint:</p>
+          <p style="margin-top:8px;"><code>POST https://dalacortefs.com.br/api/auth/register</code></p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Dados necessários (JSON)</h3>
+          <pre style="background:#f0f4f8;padding:14px;border-radius:8px;font-size:12px;margin-top:8px;overflow-x:auto;">{
+  "name": "Nome Completo do Funcionário",
+  "email": "funcionario@dalacortefs.com.br",
+  "password": "Senha@2024",
+  "password_confirmation": "Senha@2024",
+  "tipo": "funcionario"
+}</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Teste com Postman, Insomnia ou curl</h3>
+          <p>Exemplo com curl:</p>
+          <pre style="background:#f0f4f8;padding:14px;border-radius:8px;font-size:11px;margin-top:8px;overflow-x:auto;">curl -X POST https://dalacortefs.com.br/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"João Silva","email":"joao@dalacortefs.com.br","password":"Senha@2024","password_confirmation":"Senha@2024","tipo":"funcionario"}'</pre>
+        </div>
+      </div>
+
+      <div class="alert">
+        <strong>📌 Recomendação de melhoria</strong>
+        Para facilitar o cadastro sem precisar de API, podemos criar uma tela de gestão de usuários no dashboard
+        (menu Configurações → Usuários). Me peça para implementar quando quiser.
+      </div>
+    </div>
+  </div>
+
+  <!-- CADASTRO DE CLIENTE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Cadastrar Novo Cliente</h2>
+      <p>Acesso ao Portal do Cliente</p>
+    </div>
+    <div class="section-body">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Cadastro de usuário tipo "cliente"</h3>
+          <p>Mesma rota de registro, com <code>"tipo": "cliente"</code>:</p>
+          <pre style="background:#f0f4f8;padding:14px;border-radius:8px;font-size:12px;margin-top:8px;overflow-x:auto;">{
+  "name": "Nome do Cliente",
+  "email": "cliente@empresa.com.br",
+  "password": "SenhaSegura@123",
+  "password_confirmation": "SenhaSegura@123",
+  "tipo": "cliente"
+}</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Cadastrar o Cliente na tabela de Clientes</h3>
+          <p>Além do usuário, cadastre o cliente no módulo de Clientes do dashboard (menu Clientes → Novo Cliente) com os dados completos: CNPJ/CPF, razão social, telefone, endereço, regime tributário.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Enviar credenciais ao cliente</h3>
+          <p>Após cadastrar, envie para o cliente:</p>
+          <p style="margin-top:8px;">🔗 Link de acesso: <code>dalacortefs.com.br/login</code></p>
+          <p style="margin-top:4px;">📧 E-mail: o e-mail cadastrado</p>
+          <p style="margin-top:4px;">🔑 Senha: a senha definida no cadastro</p>
+          <p style="margin-top:8px;color:#666;">O cliente será direcionado automaticamente para o Portal do Cliente ao fazer login.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>O que o cliente verá no Portal</h3>
+          <table style="margin-top:8px;">
+            <tr><th>Aba</th><th>Conteúdo</th></tr>
+            <tr><td>Resumo</td><td>Total de entradas, saídas e saldo líquido dos extratos cadastrados</td></tr>
+            <tr><td>Extratos</td><td>Lista de extratos bancários enviados pelo escritório</td></tr>
+            <tr><td>Notícias</td><td>Publicações do módulo de Notícias do dashboard</td></tr>
+            <tr><td>Assistente IA</td><td>Chat com IA para dúvidas financeiras e contábeis</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTE DO SISTEMA -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Como Testar o Sistema Agora</h2>
+      <p>Passo a passo para validar se tudo está funcionando</p>
+    </div>
+    <div class="section-body">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Testar o login de Admin</h3>
+          <p>Acesse <code>dalacortefs.com.br/login</code><br>
+          Email: <code>admin@dalacortefs.com.br</code><br>
+          Senha: <code>Admin@2024</code><br>
+          Resultado esperado: redireciona para o dashboard interno.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Verificar se o backend está respondendo</h3>
+          <p>Acesse no navegador: <code>https://dalacortefs.com.br/api/health</code> ou <code>/api/auth/me</code><br>
+          Se retornar JSON, o Laravel está funcionando.<br>
+          Se retornar erro 500 ou página em branco, o backend ainda precisa de configuração no servidor.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Testar o login de Cliente</h3>
+          <p>Email: <code>cliente@dalacortefs.com.br</code><br>
+          Senha: <code>Cliente@2024</code><br>
+          Resultado esperado: redireciona para <code>dalacortefs.com.br/portal</code></p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Se o login falhar (erro de credenciais)</h3>
+          <p>O banco de dados pode não ter sido populado com os dados de seed. No servidor (HostGator via SSH ou terminal cPanel), execute:</p>
+          <pre style="background:#f0f4f8;padding:14px;border-radius:8px;font-size:12px;margin-top:8px;">cd ~/laravel
+php artisan migrate --force
+php artisan db:seed --force</pre>
+        </div>
+      </div>
+
+      <div class="alert">
+        <strong>🔧 Backend ainda não está configurado?</strong>
+        Se o login não funcionar, é porque o Laravel (backend) ainda precisa ser instalado no servidor separadamente.
+        O deploy atual só subiu o frontend (site estático).
+        Me peça para configurar o backend no servidor quando estiver pronto para isso.
+      </div>
+    </div>
+  </div>
+
+  <!-- MUDAR SENHA PADRÃO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Segurança — Alterar Senhas Padrão</h2>
+      <p>Faça isso antes de colocar clientes reais no sistema</p>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>Usuário</th><th>Email</th><th>Senha padrão</th><th>Ação</th></tr>
+        <tr><td><span class="badge badge-admin">Admin</span></td><td><code>admin@dalacortefs.com.br</code></td><td><code>Admin@2024</code></td><td>⚠️ Alterar imediatamente</td></tr>
+        <tr><td><span class="badge badge-func">Funcionário</span></td><td><code>funcionario@dalacortefs.com.br</code></td><td><code>Func@2024</code></td><td>⚠️ Alterar ou remover</td></tr>
+        <tr><td><span class="badge badge-client">Cliente</span></td><td><code>cliente@dalacortefs.com.br</code></td><td><code>Cliente@2024</code></td><td>⚠️ Alterar ou remover</td></tr>
+      </table>
+      <div class="alert" style="margin-top:16px;">
+        <strong>Para alterar via API:</strong>
+        <code>POST /api/auth/change-password</code> com <code>{"current_password": "...", "new_password": "...", "new_password_confirmation": "..."}</code> (requer token JWT no header Authorization).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">Salvar como PDF</button>
+
+</body>
+</html>

@@ -54,7 +54,7 @@ export default function LoginPage() {
             Bem-vindo de<br />volta
           </h1>
           <p className="text-white/60 text-lg">
-            Acesse o sistema de gestão financeira<br />da Dalacorte Financial Solutions.
+            Acesse o sistema de gestão financeira<br />da DFS Financial Solutions.
           </p>
 
           <div className="mt-12 grid grid-cols-2 gap-4">
@@ -73,7 +73,7 @@ export default function LoginPage() {
         </div>
 
         <div className="relative">
-          <p className="text-white/30 text-xs">© {new Date().getFullYear()} Dalacorte Financial Solutions</p>
+          <p className="text-white/30 text-xs">© {new Date().getFullYear()} DFS Financial Solutions</p>
         </div>
       </div>
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
               DFS
             </div>
             <div>
-              <p className="font-serif font-bold text-primary-700">DALACORTE</p>
+              <p className="font-serif font-bold text-primary-700">DFS</p>
               <p className="text-bronze-500 text-xs tracking-widest">FINANCIAL SOLUTIONS</p>
             </div>
           </div>
