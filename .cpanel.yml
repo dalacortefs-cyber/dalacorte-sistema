@@ -2,14 +2,25 @@
 deployment:
   tasks:
 
-    # ── 1. Garantir pasta public_html ────────────────────────
-    - mkdir -p $HOME/public_html
+    # ── 1. Copiar Laravel para ~/laravel/ ─────────────────────
+    - mkdir -p $HOME/laravel
+    - rsync -a --exclude='.git' --exclude='.env' --exclude='storage/logs/*' --exclude='storage/framework/cache/*' $SRCDIR/ $HOME/laravel/
 
-    # ── 2. Frontend estático → public_html/ ──────────────────
-    # (inclui .htaccess, api/index.php e api/.htaccess do public/)
-    - rsync -a --delete ./frontend/out/ $HOME/public_html/
+    # ── 2. Garantir estrutura de storage ─────────────────────
+    - mkdir -p $HOME/laravel/storage/framework/cache/data
+    - mkdir -p $HOME/laravel/storage/framework/sessions
+    - mkdir -p $HOME/laravel/storage/framework/views
+    - mkdir -p $HOME/laravel/storage/logs
+    - mkdir -p $HOME/laravel/bootstrap/cache
+    - chmod -R 755 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
 
-    # ── 3. Permissões ────────────────────────────────────────
-    - chmod 644 $HOME/public_html/.htaccess
-    - chmod 644 $HOME/public_html/api/index.php
-    - chmod 644 $HOME/public_html/api/.htaccess
+    # ── 3. Composer install (somente se vendor ausente) ───────
+    - export PHP=/usr/local/bin/php
+    - test -d $HOME/laravel/vendor || /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --working-dir=$HOME/laravel
+
+    # ── 4. Artisan commands ───────────────────────────────────
+    - $PHP $HOME/laravel/artisan config:clear
+    - $PHP $HOME/laravel/artisan route:clear
+    - $PHP $HOME/laravel/artisan view:clear
+    - $PHP $HOME/laravel/artisan migrate --force
+    - $PHP $HOME/laravel/artisan db:seed --class=AdminSeeder --force
