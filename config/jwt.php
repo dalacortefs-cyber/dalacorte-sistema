@@ -5,7 +5,7 @@ return [
     'keys'            => ['public' => null, 'private' => null, 'passphrase' => null],
     'ttl'             => env('JWT_TTL', 1440),
     'refresh_ttl'     => env('JWT_REFRESH_TTL', 20160),
-    'algo'            => env('JWT_ALGO', \PHPOpenSourceSaver\JWTAuth\Providers\JWT\Provider::ALGO_HS256),
+    'algo'            => env('JWT_ALGO', 'HS256'),
     'required_claims' => ['iss', 'iat', 'exp', 'nbf', 'sub', 'jti'],
     'persistent_claims' => [],
     'lock_subject'    => true,
