@@ -4,7 +4,7 @@ deployment:
 
     # ── 1. Copiar Laravel para ~/laravel/ ─────────────────────
     - mkdir -p $HOME/laravel
-    - rsync -a --exclude='.git' --exclude='.env' --exclude='storage/logs/*' --exclude='storage/framework/cache/*' $SRCDIR/ $HOME/laravel/
+    - rsync -a --exclude='.git' --exclude='.env' $SRCDIR/ $HOME/laravel/
 
     # ── 2. Garantir estrutura de storage ─────────────────────
     - mkdir -p $HOME/laravel/storage/framework/cache/data
@@ -13,14 +13,3 @@ deployment:
     - mkdir -p $HOME/laravel/storage/logs
     - mkdir -p $HOME/laravel/bootstrap/cache
     - chmod -R 755 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
-
-    # ── 3. Composer install (somente se vendor ausente) ───────
-    - export PHP=/usr/local/bin/php
-    - test -d $HOME/laravel/vendor || /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --working-dir=$HOME/laravel
-
-    # ── 4. Artisan commands ───────────────────────────────────
-    - $PHP $HOME/laravel/artisan config:clear
-    - $PHP $HOME/laravel/artisan route:clear
-    - $PHP $HOME/laravel/artisan view:clear
-    - $PHP $HOME/laravel/artisan migrate --force
-    - $PHP $HOME/laravel/artisan db:seed --class=AdminSeeder --force

@@ -49,42 +49,39 @@ jobs:
             **/.git*/**
 
   # ────────────────────────────────────────────────────────
-  # JOB 2 — Deploy do Laravel via SSH
+  # JOB 2 — Composer install e commit do vendor/ no repo
+  # (cPanel não tem composer — fazemos aqui e commitamos)
   # ────────────────────────────────────────────────────────
-  deploy-backend:
-    name: Deploy Backend (Laravel)
+  build-backend:
+    name: Composer Install → commit vendor/
     runs-on: ubuntu-latest
+    # Não rodar se o commit já veio do Actions (evita loop)
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
-      - name: Atualizar Laravel no servidor via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          host:     ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port:     22
-          script: |
-            set -e
-            cd ~/laravel
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-            # Puxa alterações do repositório
-            git pull origin main
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, pdo, pdo_mysql, tokenizer, xml, ctype, json
 
-            # Copia arquivos do backend para ~/laravel
-            rsync -av --delete dalacorte-sistema/backend/ ~/laravel/ \
-              --exclude='.env' \
-              --exclude='storage/logs' \
-              --exclude='storage/framework/cache'
+      - name: Composer install (sem dev, otimizado)
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-            # Atualiza dependências PHP
-            composer install --no-dev --optimize-autoloader --no-interaction
-
-            # Migrations pendentes
-            php artisan migrate --force
-
-            # Recria caches
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-
-            echo "✅ Deploy concluído!"
+      - name: Commitar vendor/ se houver mudanças
+        run: |
+          git config user.name "GitHub Actions [Bot]"
+          git config user.email "actions@github.com"
+          git add vendor/
+          if git diff --staged --quiet; then
+            echo "vendor/ sem alterações — pulando commit"
+          else
+            git commit -m "chore: atualizar vendor/ via Actions [skip ci]"
+            git push
+          fi
