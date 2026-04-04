@@ -23,8 +23,11 @@ jobs:
           php-version: '8.2'
           extensions: mbstring, bcmath, pdo, pdo_mysql, tokenizer, xml, ctype, json
 
+      - name: Criar .env mínimo para o artisan não falhar
+        run: cp .env.example .env 2>/dev/null || echo "APP_KEY=" > .env
+
       - name: Composer install
-        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
 
       - name: Commitar vendor/ se houver mudanças
         run: |
