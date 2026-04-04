@@ -2,7 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
+# /vendor — mantido no git para deploy via cPanel (sem Composer no shared hosting)
 .env
 .env.backup
 .env.production

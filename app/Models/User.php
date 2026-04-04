@@ -14,8 +14,11 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     protected $fillable = [
-        'name', 'email', 'password', 'tipo',
-        'ativo', 'telefone', 'avatar', 'ultimo_acesso',
+        'name', 'email', 'password',
+        // Campos legados (API)
+        'tipo', 'ativo', 'telefone', 'avatar', 'ultimo_acesso',
+        // Campos novos (Painel)
+        'role', 'active', 'escritorio_id', 'empresa_id', 'cargo',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -24,8 +27,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'ultimo_acesso'     => 'datetime',
         'ativo'             => 'boolean',
+        'active'            => 'boolean',
         'password'          => 'hashed',
     ];
+
+    // ─── JWT (API) ────────────────────────────────────────────────────────────
 
     public function getJWTIdentifier(): mixed
     {
@@ -35,46 +41,75 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [
-            'tipo'  => $this->tipo,
+            'role'  => $this->role,
             'name'  => $this->name,
             'email' => $this->email,
         ];
     }
 
-    // Relationships
-    public function clientes()
+    // ─── Helpers de role (Painel) ─────────────────────────────────────────────
+
+    public function isAdmin(): bool
     {
-        return $this->hasMany(Cliente::class);
+        return $this->role === 'admin';
     }
 
-    public function tarefas()
+    public function isGestor(): bool
     {
-        return $this->hasMany(Tarefa::class, 'responsavel_id');
+        return in_array($this->role, ['admin', 'gestor']);
     }
 
-    public function extratos()
+    public function isOperacional(): bool
     {
-        return $this->hasMany(Extrato::class);
+        return in_array($this->role, ['admin', 'gestor', 'operacional']);
     }
 
-    public function noticias()
+    public function isCliente(): bool
     {
-        return $this->hasMany(Noticia::class);
+        return $this->role === 'cliente';
     }
 
-    public function logsAuditoria()
+    // ─── Relacionamentos (Painel) ─────────────────────────────────────────────
+
+    public function escritorio()
     {
-        return $this->hasMany(LogAuditoria::class);
+        return $this->belongsTo(Escritorio::class);
     }
 
-    // Scopes
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
+    public function notificacoes()
+    {
+        return $this->hasMany(Notificacao::class);
+    }
+
+    public function notificacoesNaoLidas()
+    {
+        return $this->hasMany(Notificacao::class)->where('lida', false);
+    }
+
+    public function logAtividades()
+    {
+        return $this->hasMany(LogAtividade::class);
+    }
+
+    public function tarefasDfs()
+    {
+        return $this->hasMany(TarefaDfs::class, 'responsavel', 'name');
+    }
+
+    // ─── Scopes ───────────────────────────────────────────────────────────────
+
     public function scopeAtivos($query)
     {
-        return $query->where('ativo', true);
+        return $query->where('active', true);
     }
 
-    public function scopePorTipo($query, string $tipo)
+    public function scopePorRole($query, string $role)
     {
-        return $query->where('tipo', $tipo);
+        return $query->where('role', $role);
     }
 }
