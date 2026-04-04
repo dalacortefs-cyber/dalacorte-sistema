@@ -34,9 +34,12 @@ jobs:
         run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
 
       - name: Commitar vendor/ se houver mudanças
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "GitHub Actions [Bot]"
           git config user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git add vendor/
           if git diff --staged --quiet; then
             echo "vendor/ sem alterações — nada a commitar"
