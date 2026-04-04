@@ -3,7 +3,7 @@
         'name' => 'dalacorte/backend',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '89b021517c04a1fa4720a851f47a1b420627449b',
+        'reference' => 'acd793b94aa50b503b64b2b23053e97053d76c78',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -58,7 +58,7 @@
         'dalacorte/backend' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '89b021517c04a1fa4720a851f47a1b420627449b',
+            'reference' => 'acd793b94aa50b503b64b2b23053e97053d76c78',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
