@@ -1,23 +1,5 @@
 ---
 deployment:
   tasks:
-
-    # Copia só arquivos da aplicação para ~/laravel/
-    # vendor/ já existe lá — não mexemos nele
-
-    # ── 1. Copiar apenas código da aplicação ──────────────────
-    - rsync -a --exclude='vendor' --exclude='.git' --exclude='.env' --exclude='storage' $SRCDIR/ $HOME/laravel/
-
-    # ── 2. Estrutura de storage ───────────────────────────────
-    - mkdir -p $HOME/laravel/storage/framework/cache/data
-    - mkdir -p $HOME/laravel/storage/framework/sessions
-    - mkdir -p $HOME/laravel/storage/framework/views
-    - mkdir -p $HOME/laravel/storage/logs
-    - mkdir -p $HOME/laravel/bootstrap/cache
+    - rsync -a --exclude='vendor' --exclude='.git' --exclude='.env' --exclude='storage' --exclude='bootstrap/cache' $SRCDIR/ $HOME/laravel/
     - chmod -R 755 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
-
-    # ── 3. Artisan ────────────────────────────────────────────
-    - /usr/local/bin/php $HOME/laravel/artisan config:clear
-    - /usr/local/bin/php $HOME/laravel/artisan route:clear
-    - /usr/local/bin/php $HOME/laravel/artisan view:clear
-    - /usr/local/bin/php $HOME/laravel/artisan migrate --force
