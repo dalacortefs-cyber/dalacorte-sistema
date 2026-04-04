@@ -2,14 +2,19 @@
 deployment:
   tasks:
 
-    # ── 1. Copiar Laravel para ~/laravel/ ─────────────────────
-    - mkdir -p $HOME/laravel
-    - rsync -a --exclude='.git' --exclude='.env' $SRCDIR/ $HOME/laravel/
+    # Repo clonado direto em ~/laravel/ — sem rsync necessário
+    # Apenas garantir storage e rodar artisan
 
-    # ── 2. Garantir estrutura de storage ─────────────────────
+    # ── 1. Estrutura de storage ───────────────────────────────
     - mkdir -p $HOME/laravel/storage/framework/cache/data
     - mkdir -p $HOME/laravel/storage/framework/sessions
     - mkdir -p $HOME/laravel/storage/framework/views
     - mkdir -p $HOME/laravel/storage/logs
     - mkdir -p $HOME/laravel/bootstrap/cache
     - chmod -R 755 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
+
+    # ── 2. Artisan ────────────────────────────────────────────
+    - /usr/local/bin/php $HOME/laravel/artisan config:clear
+    - /usr/local/bin/php $HOME/laravel/artisan route:clear
+    - /usr/local/bin/php $HOME/laravel/artisan view:clear
+    - /usr/local/bin/php $HOME/laravel/artisan migrate --force
