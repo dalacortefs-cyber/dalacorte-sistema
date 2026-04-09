@@ -49,7 +49,6 @@ Route::prefix('painel')->name('painel.')->middleware(['auth'])->group(function (
 
     // Financeiro
     Route::get('financeiro', [FinanceiroController::class, 'index'])->name('financeiro.index');
-    Route::resource('financeiro/contas-receber', FinanceiroController::class . '@contasReceber', ['as' => 'financeiro.cr']);
     Route::get('financeiro/contas-receber', [FinanceiroController::class, 'contasReceber'])->name('financeiro.contas-receber');
     Route::post('financeiro/contas-receber', [FinanceiroController::class, 'storeContaReceber'])->name('financeiro.cr.store');
     Route::patch('financeiro/contas-receber/{conta}/baixar', [FinanceiroController::class, 'baixarContaReceber'])->name('financeiro.cr.baixar');
