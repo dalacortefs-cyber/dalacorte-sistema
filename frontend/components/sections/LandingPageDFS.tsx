@@ -25,7 +25,7 @@ export default function LandingPageDFS() {
 
     function animCount(id: string, target: number, suffix: string, prefix: string, duration: number) {
       const el = document.getElementById(id)
-      if (\!el) return
+      if (!el) return
       let start = 0
       const step = target / (duration / 16)
       const timer = setInterval(() => {
@@ -42,7 +42,7 @@ export default function LandingPageDFS() {
     const grid = document.getElementById('statsGrid')
     if (grid) {
       const statObs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && \!counted) {
+        if (entries[0].isIntersecting && !counted) {
           counted = true
           els.forEach((id, i) => animCount(id, targets[i], suffixes[i], prefixes[i], 2000))
           statObs.disconnect()
@@ -57,11 +57,11 @@ export default function LandingPageDFS() {
       const handleSubmit = (e: Event) => {
         e.preventDefault()
         const btn = document.getElementById('formBtn') as HTMLButtonElement | null
-        if (\!btn) return
+        if (!btn) return
         btn.textContent = 'Enviando...'
         btn.disabled = true
         setTimeout(() => {
-          btn.textContent = 'Mensagem enviada\! Entraremos em contato em breve.'
+          btn.textContent = 'Mensagem enviada! Entraremos em contato em breve.'
           btn.style.background = 'linear-gradient(135deg,#16a34a,#22c55e)'
         }, 1400)
       }
@@ -366,7 +366,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 
 
 
-<\!-- NAVBAR -->
+{/* NAVBAR */}
 <nav>
   <div className="container">
     <div className="nav-inner">
@@ -389,15 +389,15 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </nav>
 
-<\!-- 1. HERO -->
+{/* 1. HERO */}
 <section id="inicio">
   <div className="container">
     <div className="hero-inner">
       <div>
         <div className="hero-badge fade-up">Mais de 13 anos transformando contabilidades</div>
         <h1 className="hero-title fade-up fade-up-d1">
-          Contabilidade que<br>
-          <span className="grad-gold">transforma</span><br>
+          Contabilidade que<br />
+          <span className="grad-gold">transforma</span><br />
           decisões
         </h1>
         <p className="hero-sub fade-up fade-up-d2">
@@ -446,7 +446,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<\!-- 2. ESTATISTICAS -->
+{/* 2. ESTATISTICAS */}
 <section id="estatisticas">
   <div className="top-line"></div><div className="bot-line"></div>
   <div className="container">
@@ -460,13 +460,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<\!-- 3. PLANOS -->
+{/* 3. PLANOS */}
 <section id="planos">
   <div className="container">
     <div className="section-header">
       <div className="section-tag">Planos</div>
       <div className="divider-gold"></div>
-      <h2 className="section-title" style={{marginTop: "16px"}}>Planos pensados para cada fase da<br><span className="accent">sua empresa</span></h2>
+      <h2 className="section-title" style={{marginTop: "16px"}}>Planos pensados para cada fase da<br /><span className="accent">sua empresa</span></h2>
       <p className="section-sub">Do microempreendedor &agrave; empresa consolidada — encontre o plano ideal para o seu momento.</p>
     </div>
     <div className="plans-grid">
@@ -523,13 +523,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<\!-- 4. DIFERENCIAIS -->
+{/* 4. DIFERENCIAIS */}
 <section id="diferenciais">
   <div className="container">
     <div className="diferenciais-grid">
       <div>
         <div className="section-tag">Por que escolher a Dalacorte</div>
-        <h2 className="diferencial-headline">Tecnologia e<br><span className="grad-gold">inteligência automatizada</span><br>a serviço da sua empresa</h2>
+        <h2 className="diferencial-headline">Tecnologia e<br /><span className="grad-gold">inteligência automatizada</span><br />a serviço da sua empresa</h2>
         <p className="diferencial-desc">Combinamos mais de 13 anos de experiência contábil com sistemas de gestão modernos e processos otimizados — para que você tome decisões com dados precisos, em tempo real.</p>
         <div className="diferencial-items">
           <div className="diferencial-item">
@@ -555,13 +555,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<\!-- 5. DEPOIMENTOS -->
+{/* 5. DEPOIMENTOS */}
 <section id="depoimentos">
   <div className="container">
     <div className="section-header">
       <div className="section-tag" style={{color: "#8B6914"}}>Depoimentos</div>
       <div className="divider-gold"></div>
-      <h2 className="section-title" style={{marginTop: "16px", color: "#0f2029"}}>O que nossos clientes<br><span className="accent">dizem sobre n&oacute;s</span></h2>
+      <h2 className="section-title" style={{marginTop: "16px", color: "#0f2029"}}>O que nossos clientes<br /><span className="accent">dizem sobre n&oacute;s</span></h2>
       <p className="section-sub">A satisfação dos nossos clientes é o nosso maior resultado.</p>
     </div>
     <div className="depo-grid">
@@ -577,19 +577,19 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       </div>
       <div className="depo-placeholder">
         <div style={{fontSize: "34px"}}>&#128172;</div>
-        <p><strong>Seu depoimento aqui</strong><br>Esta seção está reservada para avaliações reais dos nossos clientes.</p>
+        <p><strong>Seu depoimento aqui</strong><br />Esta seção está reservada para avaliações reais dos nossos clientes.</p>
         <a href="#contato" className="btn-gold" style={{fontSize: "13px", padding: "10px 20px"}}>Seja nosso cliente →</a>
       </div>
     </div>
   </div>
 </section>
 
-<\!-- 6. CONTATO -->
+{/* 6. CONTATO */}
 <section id="contato">
   <div className="container">
     <div className="section-header" style={{marginBottom: "52px"}}>
       <div className="section-tag">Entre em contato</div>
-      <h2 style={{fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,4vw,40px)", fontWeight: "700", color: "#fff", marginTop: "14px", lineHeight: "1.2"}}>Vamos conversar sobre<br><span className="grad-gold">o seu neg&oacute;cio</span></h2>
+      <h2 style={{fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,4vw,40px)", fontWeight: "700", color: "#fff", marginTop: "14px", lineHeight: "1.2"}}>Vamos conversar sobre<br /><span className="grad-gold">o seu neg&oacute;cio</span></h2>
       <p style={{fontSize: "16px", color: "rgba(255,255,255,.45)", marginTop: "12px"}}>Atendimento especializado e personalizado para cada cliente.</p>
     </div>
     <div className="contact-grid">
@@ -603,7 +603,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div className="wa-icon">&#128172;</div>
         </a>
         <div className="contact-map">
-          <iframe src="https://www.google.com/maps/embed?pb=\!1m18\!1m12\!1m3\!1d30298.12\!2d-46.8761\!3d-17.2213\!2m3\!1f0\!2f0\!3f0\!3m2\!1i1024\!2i768\!4f13.1\!3m3\!1m2\!1s0x94af1a4285a8c0d9%3A0xa0bad0de38febaee\!2sParacatu%2C%20MG\!5e0\!3m2\!1spt-BR\!2sbr\!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Paracatu, MG"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30298.12!2d-46.8761!3d-17.2213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94af1a4285a8c0d9%3A0xa0bad0de38febaee!2sParacatu%2C%20MG!5e0!3m2!1spt-BR!2sbr!4v1" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Paracatu, MG"></iframe>
         </div>
       </div>
       <div className="contact-form">
@@ -629,7 +629,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<\!-- 7. FOOTER -->
+{/* 7. FOOTER */}
 <footer>
   <div className="container">
     <div className="footer-grid">

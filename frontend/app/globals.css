@@ -24,7 +24,7 @@
 
   body {
     @apply font-sans text-gray-800 antialiased;
-    background: #060f1a;
+    background: #f0f2f5;
   }
 
   h1, h2, h3 {
@@ -66,7 +66,13 @@
 
   /* ─── Cards ─────────────────────────────────────────── */
   .card {
-    @apply bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 p-6;
+    @apply bg-white rounded-2xl p-6 transition-all duration-300;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .card:hover {
+    box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+    transform: translateY(-1px);
   }
 
   /* Glass card — para fundos escuros */
@@ -175,13 +181,20 @@
 
   /* ─── Sidebar ───────────────────────────────────────── */
   .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer;
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer;
   }
   .sidebar-item.active {
-    @apply bg-primary-700 text-white shadow-md;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(196,163,90,0.14) 0%, rgba(196,163,90,0.04) 100%);
+    border-left: 2px solid #C4A35A;
+    padding-left: 10px;
   }
   .sidebar-item:not(.active) {
-    @apply text-gray-600 hover:bg-primary-50 hover:text-primary-700;
+    color: rgba(255,255,255,0.38);
+  }
+  .sidebar-item:not(.active):hover {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.75);
   }
 
   /* ─── Scrollbar ─────────────────────────────────────── */
