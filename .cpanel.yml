@@ -1,5 +1,14 @@
 ---
 deployment:
   tasks:
-    - rsync -a --exclude='vendor' --exclude='.git' --exclude='.env' --exclude='storage' --exclude='bootstrap/cache' $SRCDIR/ $HOME/laravel/
+    # 1. Backend Laravel → ~/laravel/
+    - rsync -a --exclude='vendor' --exclude='.git' --exclude='.env' --exclude='storage' --exclude='bootstrap/cache' --exclude='frontend' $SRCDIR/ $HOME/laravel/
     - chmod -R 755 $HOME/laravel/storage $HOME/laravel/bootstrap/cache
+
+    # 2. Frontend Next.js (static export) → public_html/
+    - rsync -a --delete $SRCDIR/frontend/out/ $HOME/public_html/
+
+    # 3. Bridge da API e .htaccess → public_html/
+    - mkdir -p $HOME/public_html/api
+    - cp $SRCDIR/public_html_api_index.php $HOME/public_html/api/index.php
+    - cp $SRCDIR/public_html_htaccess $HOME/public_html/.htaccess
